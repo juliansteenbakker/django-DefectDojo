@@ -47,10 +47,8 @@ services:
       DD_SECRET_KEY: "${DD_SECRET_KEY:-hhZCp@D28z!n@NED*yB!ROMt+WzsY*iq}"
       DD_CREDENTIAL_AES_256_KEY: "${DD_CREDENTIAL_AES_256_KEY:-&91a*agLqesc*0DJ+2*bAbsUZfR*4nLw}"
     volumes:
-        - type: volume
-          source: ./docker/extra_settings
-          target: /app/docker/extra_settings
-        - "defectdojo_media:${DD_MEDIA_ROOT:-/app/media}"
+       - defectdojo_settings:/app/docker/extra_settings
+       - "defectdojo_media:${DD_MEDIA_ROOT:-/app/media}"
   celerybeat:
     image: "defectdojo/defectdojo-django:${DJANGO_VERSION:-latest}"
     depends_on:
@@ -64,9 +62,7 @@ services:
       DD_SECRET_KEY: "${DD_SECRET_KEY:-hhZCp@D28z!n@NED*yB!ROMt+WzsY*iq}"
       DD_CREDENTIAL_AES_256_KEY: "${DD_CREDENTIAL_AES_256_KEY:-&91a*agLqesc*0DJ+2*bAbsUZfR*4nLw}"
     volumes:
-        - type: volume
-          source: ./docker/extra_settings
-          target: /app/docker/extra_settings
+       - defectdojo_settings:/app/docker/extra_settings
   celeryworker:
     image: "defectdojo/defectdojo-django:${DJANGO_VERSION:-latest}"
     depends_on:
@@ -80,10 +76,8 @@ services:
       DD_SECRET_KEY: "${DD_SECRET_KEY:-hhZCp@D28z!n@NED*yB!ROMt+WzsY*iq}"
       DD_CREDENTIAL_AES_256_KEY: "${DD_CREDENTIAL_AES_256_KEY:-&91a*agLqesc*0DJ+2*bAbsUZfR*4nLw}"
     volumes:
-        - type: volume
-          source: ./docker/extra_settings
-          target: /app/docker/extra_settings
-        - "defectdojo_media:${DD_MEDIA_ROOT:-/app/media}"
+       - defectdojo_settings:/app/docker/extra_settings
+       - "defectdojo_media:${DD_MEDIA_ROOT:-/app/media}"
   initializer:
     image: "defectdojo/defectdojo-django:${DJANGO_VERSION:-latest}"
     depends_on:
@@ -99,9 +93,7 @@ services:
       DD_SECRET_KEY: "${DD_SECRET_KEY:-hhZCp@D28z!n@NED*yB!ROMt+WzsY*iq}"
       DD_CREDENTIAL_AES_256_KEY: "${DD_CREDENTIAL_AES_256_KEY:-&91a*agLqesc*0DJ+2*bAbsUZfR*4nLw}"
     volumes:
-        - type: volume
-          source: ./docker/extra_settings
-          target: /app/docker/extra_settings
+       - defectdojo_settings:/app/docker/extra_settings
   mysql:
     image: mysql:5.7.36@sha256:7a3a7b7a29e6fbff433c339fc52245435fa2c308586481f2f92ab1df239d6a29
     environment:
@@ -121,6 +113,7 @@ volumes:
   defectdojo_data: {}
   defectdojo_media: {}
   defectdojo_rabbitmq: {}
+  defectdojo_settings: {}
   
 networks:
   default:
