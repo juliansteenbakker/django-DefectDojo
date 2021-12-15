@@ -121,3 +121,11 @@ volumes:
   defectdojo_data: {}
   defectdojo_media: {}
   defectdojo_rabbitmq: {}
+  
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.33.4.0/24
